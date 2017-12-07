@@ -120,7 +120,7 @@ namespace t1
                             //if (loc.ATTRIBUTE3 != sourceItem.NewData)
                             //{
 
-                            var attr = ctx.ATTRIBUTE.First(a => a.COMPANY == loc.COMPANY && a.ITEM == loc.ITEM && a.ATTRIBUTE3 == loc.ATTRIBUTE3);
+                            var attr = ctx.ATTRIBUTE.FirstOrDefault(a => a.COMPANY == loc.COMPANY && a.ITEM == loc.ITEM && a.ATTRIBUTE3 == loc.ATTRIBUTE3);
                             if (attr != null)
                             {
                                 loc.ATTRIBUTE_NUM = attr.ATTRIBUTE_NUM;
@@ -157,8 +157,8 @@ namespace t1
                              && l.ATTRIBUTE_NUM == loc.ATTRIBUTE_NUM
                            );
 
-                            var locF = locationsA.First();
-                            if (locF.INTERNAL_LOCATION_INV != loc.INTERNAL_LOCATION_INV)
+                            var locF = locationsA.FirstOrDefault();
+                            if (locF != null && locF.INTERNAL_LOCATION_INV != loc.INTERNAL_LOCATION_INV)
                             {
                                 if (loc.IN_TRANSIT_QTY == 0 && loc.ALLOCATED_QTY == 0) {
                                     locF.ON_HAND_QTY += loc.ON_HAND_QTY;
