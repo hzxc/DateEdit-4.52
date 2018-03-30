@@ -129,7 +129,10 @@ namespace t1.Commons
 
             //"INSERT INTO `Sheet1$` (UserName,Pwd, SecPwd, Answer) VALUES(@UserName,@Pwd,@SecPwd,@Answer)";
             //string sql1 = "INSERT INTO `Sheet1$` VALUES('123','123','123')";
-            path = System.Environment.CurrentDirectory + @"\excel\data.xlsx";
+            //path = System.Environment.CurrentDirectory + @"\excel\data.xlsx";
+
+            path = @"c:\Data\data.xlsx";
+
             foreach (var item in results)
             {
                 sBuilder.Append("INSERT INTO  `Sheet1$` VALUES (");

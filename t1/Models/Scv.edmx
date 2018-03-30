@@ -5,28 +5,9 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SCVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ATTRIBUTE">
-          <Key>
-            <PropertyRef Name="ATTRIBUTE_NUM" />
-          </Key>
-          <Property Name="ATTRIBUTE_NUM" Type="numeric" Precision="9" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ITEM" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="COMPANY" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ATTRIBUTE1" Type="nvarchar" MaxLength="256" />
-          <Property Name="ATTRIBUTE2" Type="nvarchar" MaxLength="256" />
-          <Property Name="ATTRIBUTE3" Type="nvarchar" MaxLength="256" />
-          <Property Name="ATTRIBUTE4" Type="nvarchar" MaxLength="256" />
-          <Property Name="ATTRIBUTE5" Type="nvarchar" MaxLength="256" />
-          <Property Name="ATTRIBUTE6" Type="nvarchar" MaxLength="256" />
-          <Property Name="ATTRIBUTE7" Type="nvarchar" MaxLength="256" />
-          <Property Name="ATTRIBUTE8" Type="nvarchar" MaxLength="256" />
-          <Property Name="USER_STAMP" Type="nvarchar" MaxLength="256" />
-          <Property Name="DATE_TIME_STAMP" Type="datetime" />
-        </EntityType>
         <EntityType Name="ITEM">
           <Key>
-            <PropertyRef Name="ITEM" />
-            <PropertyRef Name="COMPANY" />
+            <PropertyRef Name="INTERNAL_ITEM_NUM" />
           </Key>
           <Property Name="INTERNAL_ITEM_NUM" Type="numeric" Precision="9" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ITEM" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -83,23 +64,9 @@
           <Property Name="ITEM_ATTRIBUTE8" Type="nvarchar" MaxLength="50" />
           <Property Name="MAINTAIN_STS" Type="nchar" MaxLength="1" />
         </EntityType>
-        <EntityType Name="ITEM_BEIYONG">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="huowei" Type="nvarchar" MaxLength="2000" />
-          <Property Name="item" Type="nvarchar" MaxLength="50" />
-          <Property Name="data" Type="numeric" Precision="9" Scale="0" />
-          <Property Name="datab" Type="nvarchar" MaxLength="50" />
-          <Property Name="ndata" Type="nvarchar" MaxLength="50" />
-          <Property Name="ndatab" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="ITEM_UNIT_OF_MEASURE">
           <Key>
-            <PropertyRef Name="ITEM" />
-            <PropertyRef Name="COMPANY" />
-            <PropertyRef Name="QUANTITY_UM" />
+            <PropertyRef Name="INTERNAL_ITEM_UM" />
           </Key>
           <Property Name="INTERNAL_ITEM_UM" Type="numeric" Precision="9" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ITEM" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -169,66 +136,15 @@
           <Property Name="USER_DEF7" Type="nvarchar" MaxLength="50" />
           <Property Name="USER_DEF8" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_ATTRIBUTE_ATTRIBUTE">
-          <End Role="ITEM" Type="Self.ITEM" Multiplicity="1" />
-          <End Role="ATTRIBUTE" Type="Self.ATTRIBUTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ITEM">
-              <PropertyRef Name="ITEM" />
-              <PropertyRef Name="COMPANY" />
-            </Principal>
-            <Dependent Role="ATTRIBUTE">
-              <PropertyRef Name="ITEM" />
-              <PropertyRef Name="COMPANY" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SCVModelStoreContainer">
-          <EntitySet Name="ATTRIBUTE" EntityType="Self.ATTRIBUTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ITEM" EntityType="Self.ITEM" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ITEM_BEIYONG" EntityType="Self.ITEM_BEIYONG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ITEM_UNIT_OF_MEASURE" EntityType="Self.ITEM_UNIT_OF_MEASURE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOCATION_INVENTORY" EntityType="Self.LOCATION_INVENTORY" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ATTRIBUTE_ATTRIBUTE" Association="Self.FK_ATTRIBUTE_ATTRIBUTE">
-            <End Role="ITEM" EntitySet="ITEM" />
-            <End Role="ATTRIBUTE" EntitySet="ATTRIBUTE" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SCVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ATTRIBUTE">
-          <Key>
-            <PropertyRef Name="ATTRIBUTE_NUM" />
-          </Key>
-          <Property Name="ATTRIBUTE_NUM" Type="Decimal" Precision="9" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ITEM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="COMPANY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ATTRIBUTE1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ATTRIBUTE2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ATTRIBUTE3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ATTRIBUTE4" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ATTRIBUTE5" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ATTRIBUTE6" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ATTRIBUTE7" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ATTRIBUTE8" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="USER_STAMP" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="DATE_TIME_STAMP" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ITEM1" Relationship="SCVModel.FK_ATTRIBUTE_ATTRIBUTE" FromRole="ATTRIBUTE" ToRole="ITEM" />
-        </EntityType>
-        <EntityType Name="ITEM_BEIYONG">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="huowei" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="item" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="data" Type="Decimal" Precision="9" Scale="0" />
-          <Property Name="datab" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ndata" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ndatab" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="LOCATION_INVENTORY">
           <Key>
             <PropertyRef Name="INTERNAL_LOCATION_INV" />
@@ -269,20 +185,13 @@
           <Property Name="USER_DEF8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="SCVEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ATTRIBUTE" EntityType="Self.ATTRIBUTE" />
-          <EntitySet Name="ITEM_BEIYONG" EntityType="Self.ITEM_BEIYONG" />
           <EntitySet Name="LOCATION_INVENTORY" EntityType="Self.LOCATION_INVENTORY" />
           <EntitySet Name="ITEM" EntityType="SCVModel.ITEM" />
-          <AssociationSet Name="FK_ATTRIBUTE_ATTRIBUTE" Association="SCVModel.FK_ATTRIBUTE_ATTRIBUTE">
-            <End Role="ITEM" EntitySet="ITEM" />
-            <End Role="ATTRIBUTE" EntitySet="ATTRIBUTE" />
-          </AssociationSet>
           <EntitySet Name="ITEM_UNIT_OF_MEASURE" EntityType="SCVModel.ITEM_UNIT_OF_MEASURE" />
         </EntityContainer>
         <EntityType Name="ITEM">
           <Key>
-            <PropertyRef Name="ITEM1" />
-            <PropertyRef Name="COMPANY" />
+            <PropertyRef Name="INTERNAL_ITEM_NUM" />
           </Key>
           <Property Name="INTERNAL_ITEM_NUM" Type="Decimal" Nullable="false" Precision="9" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ITEM1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -338,17 +247,10 @@
           <Property Name="ITEM_ATTRIBUTE7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ITEM_ATTRIBUTE8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MAINTAIN_STS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="ATTRIBUTE" Relationship="SCVModel.FK_ATTRIBUTE_ATTRIBUTE" FromRole="ITEM" ToRole="ATTRIBUTE" />
         </EntityType>
-        <Association Name="FK_ATTRIBUTE_ATTRIBUTE">
-          <End Type="SCVModel.ITEM" Role="ITEM" Multiplicity="1" />
-          <End Type="SCVModel.ATTRIBUTE" Role="ATTRIBUTE" Multiplicity="*" />
-        </Association>
         <EntityType Name="ITEM_UNIT_OF_MEASURE">
           <Key>
-            <PropertyRef Name="ITEM" />
-            <PropertyRef Name="COMPANY" />
-            <PropertyRef Name="QUANTITY_UM" />
+            <PropertyRef Name="INTERNAL_ITEM_UM" />
           </Key>
           <Property Name="INTERNAL_ITEM_UM" Type="Decimal" Nullable="false" Precision="9" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ITEM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -385,38 +287,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SCVModelStoreContainer" CdmEntityContainer="SCVEntities">
-          <EntitySetMapping Name="ATTRIBUTE">
-            <EntityTypeMapping TypeName="SCVModel.ATTRIBUTE">
-              <MappingFragment StoreEntitySet="ATTRIBUTE">
-                <ScalarProperty Name="ATTRIBUTE_NUM" ColumnName="ATTRIBUTE_NUM" />
-                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
-                <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
-                <ScalarProperty Name="ATTRIBUTE1" ColumnName="ATTRIBUTE1" />
-                <ScalarProperty Name="ATTRIBUTE2" ColumnName="ATTRIBUTE2" />
-                <ScalarProperty Name="ATTRIBUTE3" ColumnName="ATTRIBUTE3" />
-                <ScalarProperty Name="ATTRIBUTE4" ColumnName="ATTRIBUTE4" />
-                <ScalarProperty Name="ATTRIBUTE5" ColumnName="ATTRIBUTE5" />
-                <ScalarProperty Name="ATTRIBUTE6" ColumnName="ATTRIBUTE6" />
-                <ScalarProperty Name="ATTRIBUTE7" ColumnName="ATTRIBUTE7" />
-                <ScalarProperty Name="ATTRIBUTE8" ColumnName="ATTRIBUTE8" />
-                <ScalarProperty Name="USER_STAMP" ColumnName="USER_STAMP" />
-                <ScalarProperty Name="DATE_TIME_STAMP" ColumnName="DATE_TIME_STAMP" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ITEM_BEIYONG">
-            <EntityTypeMapping TypeName="SCVModel.ITEM_BEIYONG">
-              <MappingFragment StoreEntitySet="ITEM_BEIYONG">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="huowei" ColumnName="huowei" />
-                <ScalarProperty Name="item" ColumnName="item" />
-                <ScalarProperty Name="data" ColumnName="data" />
-                <ScalarProperty Name="datab" ColumnName="datab" />
-                <ScalarProperty Name="ndata" ColumnName="ndata" />
-                <ScalarProperty Name="ndatab" ColumnName="ndatab" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LOCATION_INVENTORY">
             <EntityTypeMapping TypeName="SCVModel.LOCATION_INVENTORY">
               <MappingFragment StoreEntitySet="LOCATION_INVENTORY">
@@ -517,15 +387,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="FK_ATTRIBUTE_ATTRIBUTE" TypeName="SCVModel.FK_ATTRIBUTE_ATTRIBUTE" StoreEntitySet="ATTRIBUTE">
-            <EndProperty Name="ATTRIBUTE">
-              <ScalarProperty Name="ATTRIBUTE_NUM" ColumnName="ATTRIBUTE_NUM" />
-            </EndProperty>
-            <EndProperty Name="ITEM">
-              <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
-              <ScalarProperty Name="ITEM1" ColumnName="ITEM" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="ITEM_UNIT_OF_MEASURE">
             <EntityTypeMapping TypeName="SCVModel.ITEM_UNIT_OF_MEASURE">
               <MappingFragment StoreEntitySet="ITEM_UNIT_OF_MEASURE">

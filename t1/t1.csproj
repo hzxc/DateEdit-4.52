@@ -62,13 +62,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ATTRIBUTE.cs">
-      <DependentUpon>Scv.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ITEM.cs">
-      <DependentUpon>Scv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ITEM_BEIYONG.cs">
       <DependentUpon>Scv.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ITEM_UNIT_OF_MEASURE.cs">

@@ -14,12 +14,6 @@ namespace t1.Models
     
     public partial class ITEM
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ITEM()
-        {
-            this.ATTRIBUTE = new HashSet<ATTRIBUTE>();
-        }
-    
         public decimal INTERNAL_ITEM_NUM { get; set; }
         public string ITEM1 { get; set; }
         public string COMPANY { get; set; }
@@ -74,8 +68,5 @@ namespace t1.Models
         public string ITEM_ATTRIBUTE7 { get; set; }
         public string ITEM_ATTRIBUTE8 { get; set; }
         public string MAINTAIN_STS { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ATTRIBUTE> ATTRIBUTE { get; set; }
     }
 }

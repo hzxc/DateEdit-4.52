@@ -114,6 +114,7 @@ namespace t1
 
                         ctx.SaveChanges();
                         txtMsg.AppendText(sourceItem.Code + ":" + sourceItem.Name + "\r\n");
+                        sourceItem.Msg = "OK";
                     }
                 }
                 catch (Exception ex)
@@ -123,6 +124,7 @@ namespace t1
                     continue;
                 }
             }
+
             ExcelHelper.WriteData(listData);
             txtMsg.AppendText("本次执行完成！！！\r\n");
             btnRun.Enabled = true;
