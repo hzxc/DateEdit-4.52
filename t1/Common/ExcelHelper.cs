@@ -134,12 +134,9 @@ namespace t1.Commons
             {
                 sBuilder.Append("INSERT INTO  `Sheet1$` VALUES (");
                 sBuilder.Append(
-                    "'" + item.Company + "'," +
-                    "'" + item.Huowei + "'," +
-                    "'" + item.ItemCode + "'," +
-                    "'" + item.Count + "'," +
-                    "'" + item.OldDate + "'," +
-                    "'" + item.NewData + "'," +
+                    "'" + item.Code + "'," +
+                    "'" + item.OldCode + "'," +
+                    "'" + item.Name + "'," +
                     "'" + item.Msg + "'" +
                     ")");
 

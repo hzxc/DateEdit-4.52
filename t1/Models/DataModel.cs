@@ -8,12 +8,9 @@ namespace t1.Models
 {
     public class DataModel
     {
-        public string Company { get; set; }
-        public string Huowei { get; set; }
-        public string ItemCode { get; set; }
-        public int Count { get; set; }
-        public string OldDate { get; set; }
-        public string NewData { get; set; }
+        public string Code { get; set; }
+        public string OldCode { get; set; }
+        public string Name { get; set; }
         public string Msg { get; set; }
     }
 }

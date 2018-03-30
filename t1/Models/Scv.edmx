@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SCVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SCVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ATTRIBUTE">
           <Key>
             <PropertyRef Name="ATTRIBUTE_NUM" />
@@ -23,6 +23,66 @@
           <Property Name="USER_STAMP" Type="nvarchar" MaxLength="256" />
           <Property Name="DATE_TIME_STAMP" Type="datetime" />
         </EntityType>
+        <EntityType Name="ITEM">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="COMPANY" />
+          </Key>
+          <Property Name="INTERNAL_ITEM_NUM" Type="numeric" Precision="9" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ITEM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="COMPANY" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEM_DESC" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="STORAGE_TEMPLATE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEM_CLASS" Type="nvarchar" MaxLength="50" />
+          <Property Name="PACKING_CLASS" Type="nvarchar" MaxLength="50" />
+          <Property Name="ATTRIBUTE_TRACK" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="DAYS_TO_EXPIRE" Type="numeric" Precision="9" Scale="0" />
+          <Property Name="LOCATING_RULE" Type="nvarchar" MaxLength="50" />
+          <Property Name="ALLOCATION_RULE" Type="nvarchar" MaxLength="50" />
+          <Property Name="REPLENISHMENT_RULE" Type="nvarchar" MaxLength="50" />
+          <Property Name="EMPTY_LOC_RULE" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_CATEGORY1" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_CATEGORY2" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_CATEGORY3" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_CATEGORY4" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_CATEGORY5" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_CATEGORY6" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_CATEGORY7" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_CATEGORY8" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_STAMP" Type="nvarchar" MaxLength="50" />
+          <Property Name="DATE_TIME_STAMP" Type="datetime" Nullable="false" />
+          <Property Name="ACTIVE" Type="nchar" MaxLength="1" />
+          <Property Name="ATTRIBUTE_TEMPLATE_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF1" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF2" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF3" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF4" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF5" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF6" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF7" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF8" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIAL_NUM_TRACK" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="SERIAL_NUM_TEMPLATE_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="BRAND" Type="nvarchar" MaxLength="50" />
+          <Property Name="DIVISION" Type="nvarchar" MaxLength="50" />
+          <Property Name="DEPARTMENT" Type="nvarchar" MaxLength="50" />
+          <Property Name="COST" Type="numeric" Precision="18" Scale="5" />
+          <Property Name="ITEM_SIZE" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_COLOR" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_STYLE" Type="nvarchar" MaxLength="50" />
+          <Property Name="LIST_PRICE" Type="numeric" Precision="18" Scale="5" />
+          <Property Name="NET_PRICE" Type="numeric" Precision="18" Scale="5" />
+          <Property Name="PLACE_OF_ORIGIN" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_ATTRIBUTE1" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_ATTRIBUTE2" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_ATTRIBUTE3" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_ATTRIBUTE4" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_ATTRIBUTE5" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_ATTRIBUTE6" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_ATTRIBUTE7" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_ATTRIBUTE8" Type="nvarchar" MaxLength="50" />
+          <Property Name="MAINTAIN_STS" Type="nchar" MaxLength="1" />
+        </EntityType>
         <EntityType Name="ITEM_BEIYONG">
           <Key>
             <PropertyRef Name="ID" />
@@ -34,6 +94,41 @@
           <Property Name="datab" Type="nvarchar" MaxLength="50" />
           <Property Name="ndata" Type="nvarchar" MaxLength="50" />
           <Property Name="ndatab" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ITEM_UNIT_OF_MEASURE">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="COMPANY" />
+            <PropertyRef Name="QUANTITY_UM" />
+          </Key>
+          <Property Name="INTERNAL_ITEM_UM" Type="numeric" Precision="9" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ITEM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="COMPANY" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SEQUENCE" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="QUANTITY_UM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CONVERSION_QTY" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="LENGTH" Type="numeric" Precision="19" Scale="5" />
+          <Property Name="WIDTH" Type="numeric" Precision="19" Scale="5" />
+          <Property Name="HEIGHT" Type="numeric" Precision="19" Scale="5" />
+          <Property Name="DIMENSION_UM" Type="nvarchar" MaxLength="50" />
+          <Property Name="WEIGHT" Type="numeric" Precision="19" Scale="5" />
+          <Property Name="WEIGHT_UM" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_STAMP" Type="nvarchar" MaxLength="30" />
+          <Property Name="PROCESS_STAMP" Type="nvarchar" MaxLength="100" />
+          <Property Name="DATE_TIME_STAMP" Type="datetime" />
+          <Property Name="TREAT_FULL_PCT" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="MOVEMENT_CLS" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEM_CLASS" Type="nvarchar" MaxLength="50" />
+          <Property Name="TREAT_AS_LOOSE" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="GROUP_DURING_CHECKIN" Type="nchar" MaxLength="1" />
+          <Property Name="USER_DEF1" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF2" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF3" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF4" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF5" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF6" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF7" Type="nvarchar" MaxLength="50" />
+          <Property Name="USER_DEF8" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="LOCATION_INVENTORY">
           <Key>
@@ -74,13 +169,32 @@
           <Property Name="USER_DEF7" Type="nvarchar" MaxLength="50" />
           <Property Name="USER_DEF8" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_ATTRIBUTE_ATTRIBUTE">
+          <End Role="ITEM" Type="Self.ITEM" Multiplicity="1" />
+          <End Role="ATTRIBUTE" Type="Self.ATTRIBUTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ITEM">
+              <PropertyRef Name="ITEM" />
+              <PropertyRef Name="COMPANY" />
+            </Principal>
+            <Dependent Role="ATTRIBUTE">
+              <PropertyRef Name="ITEM" />
+              <PropertyRef Name="COMPANY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SCVModelStoreContainer">
           <EntitySet Name="ATTRIBUTE" EntityType="Self.ATTRIBUTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ITEM" EntityType="Self.ITEM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ITEM_BEIYONG" EntityType="Self.ITEM_BEIYONG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ITEM_UNIT_OF_MEASURE" EntityType="Self.ITEM_UNIT_OF_MEASURE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOCATION_INVENTORY" EntityType="Self.LOCATION_INVENTORY" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ATTRIBUTE_ATTRIBUTE" Association="Self.FK_ATTRIBUTE_ATTRIBUTE">
+            <End Role="ITEM" EntitySet="ITEM" />
+            <End Role="ATTRIBUTE" EntitySet="ATTRIBUTE" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SCVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -101,6 +215,7 @@
           <Property Name="ATTRIBUTE8" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="USER_STAMP" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="DATE_TIME_STAMP" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ITEM1" Relationship="SCVModel.FK_ATTRIBUTE_ATTRIBUTE" FromRole="ATTRIBUTE" ToRole="ITEM" />
         </EntityType>
         <EntityType Name="ITEM_BEIYONG">
           <Key>
@@ -157,7 +272,113 @@
           <EntitySet Name="ATTRIBUTE" EntityType="Self.ATTRIBUTE" />
           <EntitySet Name="ITEM_BEIYONG" EntityType="Self.ITEM_BEIYONG" />
           <EntitySet Name="LOCATION_INVENTORY" EntityType="Self.LOCATION_INVENTORY" />
+          <EntitySet Name="ITEM" EntityType="SCVModel.ITEM" />
+          <AssociationSet Name="FK_ATTRIBUTE_ATTRIBUTE" Association="SCVModel.FK_ATTRIBUTE_ATTRIBUTE">
+            <End Role="ITEM" EntitySet="ITEM" />
+            <End Role="ATTRIBUTE" EntitySet="ATTRIBUTE" />
+          </AssociationSet>
+          <EntitySet Name="ITEM_UNIT_OF_MEASURE" EntityType="SCVModel.ITEM_UNIT_OF_MEASURE" />
         </EntityContainer>
+        <EntityType Name="ITEM">
+          <Key>
+            <PropertyRef Name="ITEM1" />
+            <PropertyRef Name="COMPANY" />
+          </Key>
+          <Property Name="INTERNAL_ITEM_NUM" Type="Decimal" Nullable="false" Precision="9" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ITEM1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COMPANY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_DESC" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="STORAGE_TEMPLATE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_CLASS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PACKING_CLASS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ATTRIBUTE_TRACK" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="DAYS_TO_EXPIRE" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="LOCATING_RULE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ALLOCATION_RULE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="REPLENISHMENT_RULE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EMPTY_LOC_RULE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_CATEGORY1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_CATEGORY2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_CATEGORY3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_CATEGORY4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_CATEGORY5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_CATEGORY6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_CATEGORY7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_CATEGORY8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_STAMP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_TIME_STAMP" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ACTIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="ATTRIBUTE_TEMPLATE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIAL_NUM_TRACK" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="SERIAL_NUM_TEMPLATE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BRAND" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DIVISION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DEPARTMENT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COST" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="ITEM_SIZE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_COLOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_STYLE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LIST_PRICE" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="NET_PRICE" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="PLACE_OF_ORIGIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_ATTRIBUTE1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_ATTRIBUTE2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_ATTRIBUTE3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_ATTRIBUTE4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_ATTRIBUTE5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_ATTRIBUTE6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_ATTRIBUTE7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_ATTRIBUTE8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MAINTAIN_STS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ATTRIBUTE" Relationship="SCVModel.FK_ATTRIBUTE_ATTRIBUTE" FromRole="ITEM" ToRole="ATTRIBUTE" />
+        </EntityType>
+        <Association Name="FK_ATTRIBUTE_ATTRIBUTE">
+          <End Type="SCVModel.ITEM" Role="ITEM" Multiplicity="1" />
+          <End Type="SCVModel.ATTRIBUTE" Role="ATTRIBUTE" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ITEM_UNIT_OF_MEASURE">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="COMPANY" />
+            <PropertyRef Name="QUANTITY_UM" />
+          </Key>
+          <Property Name="INTERNAL_ITEM_UM" Type="Decimal" Nullable="false" Precision="9" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ITEM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COMPANY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SEQUENCE" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="QUANTITY_UM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CONVERSION_QTY" Type="Decimal" Nullable="false" Precision="9" Scale="0" />
+          <Property Name="LENGTH" Type="Decimal" Precision="19" Scale="5" />
+          <Property Name="WIDTH" Type="Decimal" Precision="19" Scale="5" />
+          <Property Name="HEIGHT" Type="Decimal" Precision="19" Scale="5" />
+          <Property Name="DIMENSION_UM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WEIGHT" Type="Decimal" Precision="19" Scale="5" />
+          <Property Name="WEIGHT_UM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_STAMP" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PROCESS_STAMP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_TIME_STAMP" Type="DateTime" Precision="3" />
+          <Property Name="TREAT_FULL_PCT" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="MOVEMENT_CLS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEM_CLASS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TREAT_AS_LOOSE" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="GROUP_DURING_CHECKIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="USER_DEF1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USER_DEF8" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -233,6 +454,109 @@
                 <ScalarProperty Name="USER_DEF6" ColumnName="USER_DEF6" />
                 <ScalarProperty Name="USER_DEF7" ColumnName="USER_DEF7" />
                 <ScalarProperty Name="USER_DEF8" ColumnName="USER_DEF8" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITEM">
+            <EntityTypeMapping TypeName="SCVModel.ITEM">
+              <MappingFragment StoreEntitySet="ITEM">
+                <ScalarProperty Name="MAINTAIN_STS" ColumnName="MAINTAIN_STS" />
+                <ScalarProperty Name="ITEM_ATTRIBUTE8" ColumnName="ITEM_ATTRIBUTE8" />
+                <ScalarProperty Name="ITEM_ATTRIBUTE7" ColumnName="ITEM_ATTRIBUTE7" />
+                <ScalarProperty Name="ITEM_ATTRIBUTE6" ColumnName="ITEM_ATTRIBUTE6" />
+                <ScalarProperty Name="ITEM_ATTRIBUTE5" ColumnName="ITEM_ATTRIBUTE5" />
+                <ScalarProperty Name="ITEM_ATTRIBUTE4" ColumnName="ITEM_ATTRIBUTE4" />
+                <ScalarProperty Name="ITEM_ATTRIBUTE3" ColumnName="ITEM_ATTRIBUTE3" />
+                <ScalarProperty Name="ITEM_ATTRIBUTE2" ColumnName="ITEM_ATTRIBUTE2" />
+                <ScalarProperty Name="ITEM_ATTRIBUTE1" ColumnName="ITEM_ATTRIBUTE1" />
+                <ScalarProperty Name="PLACE_OF_ORIGIN" ColumnName="PLACE_OF_ORIGIN" />
+                <ScalarProperty Name="NET_PRICE" ColumnName="NET_PRICE" />
+                <ScalarProperty Name="LIST_PRICE" ColumnName="LIST_PRICE" />
+                <ScalarProperty Name="ITEM_STYLE" ColumnName="ITEM_STYLE" />
+                <ScalarProperty Name="ITEM_COLOR" ColumnName="ITEM_COLOR" />
+                <ScalarProperty Name="ITEM_SIZE" ColumnName="ITEM_SIZE" />
+                <ScalarProperty Name="COST" ColumnName="COST" />
+                <ScalarProperty Name="DEPARTMENT" ColumnName="DEPARTMENT" />
+                <ScalarProperty Name="DIVISION" ColumnName="DIVISION" />
+                <ScalarProperty Name="BRAND" ColumnName="BRAND" />
+                <ScalarProperty Name="SERIAL_NUM_TEMPLATE_NAME" ColumnName="SERIAL_NUM_TEMPLATE_NAME" />
+                <ScalarProperty Name="SERIAL_NUM_TRACK" ColumnName="SERIAL_NUM_TRACK" />
+                <ScalarProperty Name="USER_DEF8" ColumnName="USER_DEF8" />
+                <ScalarProperty Name="USER_DEF7" ColumnName="USER_DEF7" />
+                <ScalarProperty Name="USER_DEF6" ColumnName="USER_DEF6" />
+                <ScalarProperty Name="USER_DEF5" ColumnName="USER_DEF5" />
+                <ScalarProperty Name="USER_DEF4" ColumnName="USER_DEF4" />
+                <ScalarProperty Name="USER_DEF3" ColumnName="USER_DEF3" />
+                <ScalarProperty Name="USER_DEF2" ColumnName="USER_DEF2" />
+                <ScalarProperty Name="USER_DEF1" ColumnName="USER_DEF1" />
+                <ScalarProperty Name="ATTRIBUTE_TEMPLATE_NAME" ColumnName="ATTRIBUTE_TEMPLATE_NAME" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="DATE_TIME_STAMP" ColumnName="DATE_TIME_STAMP" />
+                <ScalarProperty Name="USER_STAMP" ColumnName="USER_STAMP" />
+                <ScalarProperty Name="ITEM_CATEGORY8" ColumnName="ITEM_CATEGORY8" />
+                <ScalarProperty Name="ITEM_CATEGORY7" ColumnName="ITEM_CATEGORY7" />
+                <ScalarProperty Name="ITEM_CATEGORY6" ColumnName="ITEM_CATEGORY6" />
+                <ScalarProperty Name="ITEM_CATEGORY5" ColumnName="ITEM_CATEGORY5" />
+                <ScalarProperty Name="ITEM_CATEGORY4" ColumnName="ITEM_CATEGORY4" />
+                <ScalarProperty Name="ITEM_CATEGORY3" ColumnName="ITEM_CATEGORY3" />
+                <ScalarProperty Name="ITEM_CATEGORY2" ColumnName="ITEM_CATEGORY2" />
+                <ScalarProperty Name="ITEM_CATEGORY1" ColumnName="ITEM_CATEGORY1" />
+                <ScalarProperty Name="EMPTY_LOC_RULE" ColumnName="EMPTY_LOC_RULE" />
+                <ScalarProperty Name="REPLENISHMENT_RULE" ColumnName="REPLENISHMENT_RULE" />
+                <ScalarProperty Name="ALLOCATION_RULE" ColumnName="ALLOCATION_RULE" />
+                <ScalarProperty Name="LOCATING_RULE" ColumnName="LOCATING_RULE" />
+                <ScalarProperty Name="DAYS_TO_EXPIRE" ColumnName="DAYS_TO_EXPIRE" />
+                <ScalarProperty Name="ATTRIBUTE_TRACK" ColumnName="ATTRIBUTE_TRACK" />
+                <ScalarProperty Name="PACKING_CLASS" ColumnName="PACKING_CLASS" />
+                <ScalarProperty Name="ITEM_CLASS" ColumnName="ITEM_CLASS" />
+                <ScalarProperty Name="STORAGE_TEMPLATE" ColumnName="STORAGE_TEMPLATE" />
+                <ScalarProperty Name="ITEM_DESC" ColumnName="ITEM_DESC" />
+                <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
+                <ScalarProperty Name="ITEM1" ColumnName="ITEM" />
+                <ScalarProperty Name="INTERNAL_ITEM_NUM" ColumnName="INTERNAL_ITEM_NUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_ATTRIBUTE_ATTRIBUTE" TypeName="SCVModel.FK_ATTRIBUTE_ATTRIBUTE" StoreEntitySet="ATTRIBUTE">
+            <EndProperty Name="ATTRIBUTE">
+              <ScalarProperty Name="ATTRIBUTE_NUM" ColumnName="ATTRIBUTE_NUM" />
+            </EndProperty>
+            <EndProperty Name="ITEM">
+              <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
+              <ScalarProperty Name="ITEM1" ColumnName="ITEM" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="ITEM_UNIT_OF_MEASURE">
+            <EntityTypeMapping TypeName="SCVModel.ITEM_UNIT_OF_MEASURE">
+              <MappingFragment StoreEntitySet="ITEM_UNIT_OF_MEASURE">
+                <ScalarProperty Name="USER_DEF8" ColumnName="USER_DEF8" />
+                <ScalarProperty Name="USER_DEF7" ColumnName="USER_DEF7" />
+                <ScalarProperty Name="USER_DEF6" ColumnName="USER_DEF6" />
+                <ScalarProperty Name="USER_DEF5" ColumnName="USER_DEF5" />
+                <ScalarProperty Name="USER_DEF4" ColumnName="USER_DEF4" />
+                <ScalarProperty Name="USER_DEF3" ColumnName="USER_DEF3" />
+                <ScalarProperty Name="USER_DEF2" ColumnName="USER_DEF2" />
+                <ScalarProperty Name="USER_DEF1" ColumnName="USER_DEF1" />
+                <ScalarProperty Name="GROUP_DURING_CHECKIN" ColumnName="GROUP_DURING_CHECKIN" />
+                <ScalarProperty Name="TREAT_AS_LOOSE" ColumnName="TREAT_AS_LOOSE" />
+                <ScalarProperty Name="ITEM_CLASS" ColumnName="ITEM_CLASS" />
+                <ScalarProperty Name="MOVEMENT_CLS" ColumnName="MOVEMENT_CLS" />
+                <ScalarProperty Name="TREAT_FULL_PCT" ColumnName="TREAT_FULL_PCT" />
+                <ScalarProperty Name="DATE_TIME_STAMP" ColumnName="DATE_TIME_STAMP" />
+                <ScalarProperty Name="PROCESS_STAMP" ColumnName="PROCESS_STAMP" />
+                <ScalarProperty Name="USER_STAMP" ColumnName="USER_STAMP" />
+                <ScalarProperty Name="WEIGHT_UM" ColumnName="WEIGHT_UM" />
+                <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
+                <ScalarProperty Name="DIMENSION_UM" ColumnName="DIMENSION_UM" />
+                <ScalarProperty Name="HEIGHT" ColumnName="HEIGHT" />
+                <ScalarProperty Name="WIDTH" ColumnName="WIDTH" />
+                <ScalarProperty Name="LENGTH" ColumnName="LENGTH" />
+                <ScalarProperty Name="CONVERSION_QTY" ColumnName="CONVERSION_QTY" />
+                <ScalarProperty Name="QUANTITY_UM" ColumnName="QUANTITY_UM" />
+                <ScalarProperty Name="SEQUENCE" ColumnName="SEQUENCE" />
+                <ScalarProperty Name="COMPANY" ColumnName="COMPANY" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+                <ScalarProperty Name="INTERNAL_ITEM_UM" ColumnName="INTERNAL_ITEM_UM" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

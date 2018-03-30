@@ -27,5 +27,7 @@ namespace t1.Models
         public string ATTRIBUTE8 { get; set; }
         public string USER_STAMP { get; set; }
         public Nullable<System.DateTime> DATE_TIME_STAMP { get; set; }
+    
+        public virtual ITEM ITEM1 { get; set; }
     }
 }

@@ -6,8 +6,11 @@
     <edmx:Diagrams>
       <Diagram DiagramId="eb21e378c3094c7ea146adf6261c11ea" Name="Diagram1">
         <EntityTypeShape EntityType="SCVModel.ATTRIBUTE" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SCVModel.ITEM_BEIYONG" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SCVModel.LOCATION_INVENTORY" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SCVModel.ITEM_BEIYONG" Width="2.375" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SCVModel.LOCATION_INVENTORY" Width="2.625" PointX="6.125" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SCVModel.ITEM" Width="1.5" PointX="0.75" PointY="20" />
+        <AssociationConnector Association="SCVModel.FK_ATTRIBUTE_ATTRIBUTE" />
+        <EntityTypeShape EntityType="SCVModel.ITEM_UNIT_OF_MEASURE" Width="2.375" PointX="2.875" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

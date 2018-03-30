@@ -29,9 +29,9 @@ namespace t1
             {
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    string initialDirectory = System.Environment.CurrentDirectory;
-                    //openFileDialog.InitialDirectory = @"C:\Data";
-                    openFileDialog.InitialDirectory = initialDirectory;
+                    //string initialDirectory = System.Environment.CurrentDirectory;
+                    openFileDialog.InitialDirectory = @"C:\Data";
+                    //openFileDialog.InitialDirectory = initialDirectory;
                     openFileDialog.Filter = "Excel File |*.xlsxx;*.xlsx";
                     openFileDialog.RestoreDirectory = true;
 
@@ -45,12 +45,9 @@ namespace t1
                         foreach (DataRow row in dt.Rows)
                         {
                             DataModel model = new DataModel();
-                            model.Company = row[0].ToString().Trim();
-                            model.Huowei = row[1].ToString().Trim();
-                            model.ItemCode = row[2].ToString().Trim();
-                            model.Count = Convert.ToInt32(row[3]);
-                            model.OldDate = row[4].ToString().Trim();
-                            model.NewData = row[5].ToString().Trim();
+                            model.Code = row[0].ToString().Trim();
+                            model.OldCode = row[1].ToString().Trim();
+                            model.Name = row[2].ToString().Trim();
                             listData.Add(model);
                             //sBuilder.Clear();
                             //sBuilder.Append(row[0].ToString().Trim() + "\t");
@@ -82,111 +79,47 @@ namespace t1
         private void btnRun_Click(object sender, EventArgs e)
         {
             btnRun.Enabled = false;
+
             foreach (var sourceItem in listData)
             {
-
                 try
                 {
                     using (var ctx = new SCVEntities())
                     {
-                        string oldDate = string.IsNullOrWhiteSpace(sourceItem.OldDate) ? null : sourceItem.OldDate;
+                        //string oldDate = string.IsNullOrWhiteSpace(sourceItem.OldDate) ? null : sourceItem.OldDate;
 
-                        DbSet<LOCATION_INVENTORY> LocationInventory = ctx.Set<LOCATION_INVENTORY>();
+                        ITEM matchedItem = ctx.Set<ITEM>().FirstOrDefault(i => i.COMPANY == "RB" && i.ITEM1 == sourceItem.OldCode && i.PACKING_CLASS == null);
 
-                        if (string.IsNullOrEmpty(sourceItem.OldDate))
+                        if (matchedItem != null)
                         {
-                            sourceItem.OldDate = null;
-                        }
+                            matchedItem.PACKING_CLASS = "Matched";
+                            matchedItem.ITEM1 = sourceItem.Code;
+                            matchedItem.ITEM_DESC = sourceItem.Name;
 
-                        var locations = LocationInventory.Where(l =>
-                          l.COMPANY == sourceItem.Company
-                          && l.ITEM == sourceItem.ItemCode
-                          && l.LOCATION == sourceItem.Huowei
-                          && l.ATTRIBUTE3 == sourceItem.OldDate
-                          && l.ON_HAND_QTY == sourceItem.Count
-                        );
-
-                        if (locations.Count() > 1)
-                        {
-                            sourceItem.Msg = "数据源匹配到多条数据";
-                            txtMsg.AppendText(sourceItem.ItemCode + ":" + sourceItem.Msg + "\r\n");
-                            continue;
-                        }
-
-                        if (!locations.Any())
-                        {
-                            sourceItem.Msg = "未匹配到数据,请检查数量、编码、日期、货位";
-                            txtMsg.AppendText(sourceItem.ItemCode + ":" + sourceItem.Msg + "\r\n");
-                            continue;
-                        }
-
-                        foreach (var loc in locations)
-                        {
-                            //if (loc.ATTRIBUTE3 != sourceItem.NewData)
-                            //{
-
-                            var attr = ctx.ATTRIBUTE.FirstOrDefault(a => a.COMPANY == loc.COMPANY && a.ITEM == loc.ITEM && a.ATTRIBUTE3 == sourceItem.NewData);
-                            if (attr != null)
+                            var matchedItemUnit = ctx.Set<ITEM_UNIT_OF_MEASURE>().FirstOrDefault(u => u.ITEM == sourceItem.OldCode && u.COMPANY == "RB" && u.ITEM_CLASS == null);
+                            if (matchedItemUnit != null)
                             {
-                                loc.ATTRIBUTE_NUM = attr.ATTRIBUTE_NUM;
-                            }
-                            else
-                            {
-                                var newAttribute = new ATTRIBUTE
-                                {
-                                    ITEM = loc.ITEM,
-                                    COMPANY = loc.COMPANY,
-                                    ATTRIBUTE3 = sourceItem.NewData,
-                                    USER_STAMP = "system",
-                                    DATE_TIME_STAMP = DateTime.Now
-                                };
-
-                                using (var ctx1 = new SCVEntities())
-                                {
-                                    ctx1.ATTRIBUTE.Add(newAttribute);
-                                    ctx1.SaveChanges();
-                                }
-
-                                loc.ATTRIBUTE_NUM = newAttribute.ATTRIBUTE_NUM;
+                                matchedItemUnit.ITEM = sourceItem.Code;
+                                matchedItemUnit.ITEM_CLASS = "Matched";
                             }
 
-                            loc.ATTRIBUTE3 = sourceItem.NewData;
-
-
-                            var locationsA = LocationInventory.Where(l =>
-                             l.COMPANY == loc.COMPANY
-                             && l.ITEM == loc.ITEM
-                             && l.LOCATION == loc.LOCATION
-                             && l.ATTRIBUTE3 == loc.ATTRIBUTE3
-                             && l.INVENTORY_STS == loc.INVENTORY_STS
-                             && l.ATTRIBUTE_NUM == loc.ATTRIBUTE_NUM
-                           );
-
-                            var locF = locationsA.FirstOrDefault();
-                            if (locF != null && locF.INTERNAL_LOCATION_INV != loc.INTERNAL_LOCATION_INV)
+                            var locationInvs = ctx.Set<LOCATION_INVENTORY>().Where(l => l.USER_DEF8 == null && l.ITEM == sourceItem.OldCode && l.COMPANY == "RB");
+                            foreach (var li in locationInvs)
                             {
-                                if (loc.IN_TRANSIT_QTY == 0 && loc.ALLOCATED_QTY == 0)
-                                {
-                                    locF.ON_HAND_QTY += loc.ON_HAND_QTY;
-                                    LocationInventory.Remove(loc);
-                                }
+                                li.ITEM = sourceItem.Code;
+                                li.ITEM_DESC = sourceItem.Name;
+                                li.USER_DEF8 = "Matched";
                             }
-
-                            sourceItem.Msg = "修改成功";
-                            //}
-                            //else
-                            //{
-                            //    sourceItem.Msg = "新效期与原效期相同，无需修改";
-                            //}
                         }
+
                         ctx.SaveChanges();
-                        txtMsg.AppendText(sourceItem.ItemCode + ":" + sourceItem.Msg + "\r\n");
+                        txtMsg.AppendText(sourceItem.Code + ":" + sourceItem.Name + "\r\n");
                     }
                 }
                 catch (Exception ex)
                 {
                     sourceItem.Msg = ex.Message;
-                    txtMsg.AppendText(sourceItem.ItemCode + ":" + ex.Message + "\r\n");
+                    txtMsg.AppendText(sourceItem.Code + ":" + ex.Message + "\r\n");
                     continue;
                 }
             }

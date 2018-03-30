@@ -28,5 +28,7 @@ namespace t1.Models
         public virtual DbSet<ATTRIBUTE> ATTRIBUTE { get; set; }
         public virtual DbSet<ITEM_BEIYONG> ITEM_BEIYONG { get; set; }
         public virtual DbSet<LOCATION_INVENTORY> LOCATION_INVENTORY { get; set; }
+        public virtual DbSet<ITEM> ITEM { get; set; }
+        public virtual DbSet<ITEM_UNIT_OF_MEASURE> ITEM_UNIT_OF_MEASURE { get; set; }
     }
 }
